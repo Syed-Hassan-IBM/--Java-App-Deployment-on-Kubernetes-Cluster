@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vproweb
+  labels:
+    app: vproweb 
+spec:
+  selector:
+    matchLabels:
+      app: vproweb
+  template:
+    metadata:
+      name: vproweb
+      labels:
+        app: vproweb
+    spec:
+      containers:
+        - name: vproweb
+          image: 9952268641/devops:vproweb
+          ports:
+              - containerPort: 80
+---
+apiVersion: v1 
+kind: Service
+metadata:
+  name: vproweb
+spec:
+  selector:
+    app: vproweb
+  ports:
+    - port: 80
+      targetPort: 80
